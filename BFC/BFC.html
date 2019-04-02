@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>BFC</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    section {
+      width: 450px;
+      margin: 50px auto;
+    }
+
+    body {
+      padding: 20px 0px;
+      background-color: #333;
+      color: #fff;
+    }
+
+    .split {
+      height: 1px;
+      background-color: #e5f6fb;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 1、父元素高度问题 -->
+  <!--正常情况下 -->
+  </div>
+  <section class="sec">
+    <style media="screen">
+      .sec {
+        background: #ebf6fd;
+      }
+
+      .child {
+        height: 50px;
+        background: #09d;
+        margin-top: 50px;
+        line-height: 50px;
+      }
+    </style>
+    <article class="child">height: 50px;margin-top: 50px;</article>
+  </section>
+  <!-- 解决方法：父元素为BFC -->
+  <section class="sec" style="overflow:hidden">
+    <article class="child">height: 50px;margin-top: 50px;</article>
+  </section>
+  <!-- 解决方法：父元素为BFC -->
+  <section class="sec" style="padding-top:50px">
+    <article class="child">height: 50px;margin-top: 50px;</article>
+  </section>
+  <div class="split"></div>
+
+  <!--2、消除边距重叠问题 -->
+  <!--正常情况下 -->
+  <section class="margin">
+    <style media="screen">
+      .margin {
+        background: #ebf6fd;
+      }
+
+      .margin p {
+        margin: 20px auto 20px;
+        background: #09d;
+        line-height: 40px;
+      }
+    </style>
+    <p>切图妞切图妞切图妞切图妞切图妞切图妞切图妞</p>
+    <p>切图妞切图妞切图妞切图妞切图妞切图妞切图妞</p>
+  </section>
+  <!-- 消除方法：给子元素再创建一个父元素，使父元素是bfc -->
+  <section class="margin">
+    <div style="overflow:hidden">
+      <p>切图妞切图妞切图妞切图妞切图妞切图妞切图妞</p>
+    </div>
+    <div style="overflow:hidden">
+      <p>切图妞切图妞切图妞切图妞切图妞切图妞切图妞</p>
+    </div>
+  </section>
+  <div class="split"></div>
+
+
+  <!-- 3、两栏自适应布局 -->
+  <!-- 正常情况， float的包裹性 -->
+  <section class="layout">
+    <style media="screen">
+      .layout {
+        background: #ebf6fd;
+        margin-top: 20px;
+      }
+
+      .layout .left {
+        float: left;
+        width: 150px;
+        height: 168px;
+      }
+
+      .layout .right {
+        background: #09d;
+        text-align: left;
+      }
+    </style>
+    <img src="img/bqb1.jpg" class="left" alt="" />
+    <div class="right">
+      傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻
+    </div>
+  </section>
+  <!-- 解决方法：使右侧元素为BFC -->
+  <section class="layout">
+    <img src="img/bqb1.jpg" class="left" alt="" />
+    <div class="right" style="overflow:hidden">
+      傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻
+    </div>
+  </section>
+  <!-- 图片与文字间距20px的两种方法：左侧margin-right或者右侧padding-left -->
+  <section id="layout">
+    <style media="screen">
+    </style>
+    <img src="img/bqb1.jpg" class="left" style="margin-right:20px" />
+    <div class="right" style="overflow: hidden">
+      傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻
+    </div>
+  </section>
+  <section id="layout">
+    <style media="screen">
+    </style>
+    <img src="img/bqb1.jpg" class="left" alt="" />
+    <div class="right" style="overflow: hidden;padding-left:20px">
+      傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻福傻逼没有傻人有傻
+    </div>
+  </section>
+  <div class="split"></div>
+
+
+  <!--4、bfc子元素即使是浮动元素也会参与计算 -->
+  <!--父元素包含浮动元素，导致父元素塌陷 -->
+  <!-- 正常情况 -->
+  <section class="floatBorder">
+    <style media="screen">
+      .floatBorder {
+        background: #ebf6fd;
+        border: 1px solid #FFBE00;
+        margin-top: 20px;
+      }
+
+      .floatBorder .float {
+        float: left;
+        line-height: 50px;
+        background: #08d;
+      }
+
+      .clearfix {
+        *zoom: 1
+      }
+
+      .clearfix:after {
+        content: '';
+        display: table;
+        clear: both
+      }
+    </style>
+    <div class="float">切图妞切图妞切图妞切图妞切图妞切图妞切图妞</div>
+  </section>
+  <div style="height:20px;"></div>
+  <!-- 解决方法：使父元素变成BFC -->
+  <section class="floatBorder" style="overflow:auto">
+    <div class="float">切图妞切图妞切图妞切图妞切图妞切图妞切图妞</div>
+  </section>
+  <!-- 清除浮动 -->
+  <section class="floatBorder clearfix">
+    <div class="float">切图妞切图妞切图妞切图妞切图妞切图妞切图妞</div>
+  </section>
+</body>
+
+</html>
