@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>prototype</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background: #ebf6fd;
+    }
+
+    section {
+      background-color: #fff;
+      color: #08d;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 40px;
+      border-bottom: 1px solid #08d;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 18px;
+      line-height: 30px;
+      margin-bottom: 10px;
+      color: #333;
+      background: #FAFAFA;
+    }
+
+    li {
+      list-style: inside;
+      margin-bottom: 5px;
+    }
+
+    .attention {
+      font-size: 14px;
+      color: #08d;
+      padding: 10px 0;
+    }
+
+    article {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h1>构造函数</h1>
+    <article>
+      <h2>*构造函数与普通函数区别</h2>
+      <ul>
+        <li>构造函数的首字母必须大写，用来区分于普通函数(驼峰命名)，此为约定俗成 </li>
+        <li>构造函数内部使用的this对象，来指向即将要生成的实例对象，而普通函数中的this指向调用函数的对象（没有对象时默认为window）</li>
+        <li>构造函数默认return this，但也可以用return语句，返回值会根据return值的类型而有所不同。普通函数可使用return返回值</li>
+        <li>构造函数使用New来生成实例对象进行调用，普通函数直接调用</li>
+      </ul>
+      <div class="attention">
+        <bold>注意：构造函数内的this指向即将要生成的实例对象Person,普通函数内使用this,指向window时容易造成全局污染</bold>
+      </div>
+    </article>
+    <article>
+      <h2>*隐藏的构造函数</h2>
+      <ul>
+        <li>var a={}是var a=new Object()的语法糖</li>
+        <li>var a=[]是var a=new Array()的语法糖</li>
+        <li>function Person(){}是var Person=new Function()的语法糖</li>
+      </ul>
+      <div class="attention">
+        <bold>语法糖：更简单表达一个操作的语法，能够增加程序的可读性，在性能上不会带来损失的同时提高开发编码的效率，从而减少程序代码出错的机会！</bold>
+      </div>
+    </article>
+    <article>
+      <h2>*instanceof</h2>
+      <p>可使用instanceof判断一个函数是否是一个变量的构造函数</p>
+
+      <div class="attention">
+        <bold>解析：instanceof的判断逻辑是实例p的__proto__一层一层往上，能否对应到Person.prototype，同样也能到Object.prototype </bold>
+      </div>
+    </article>
+    <article>
+      <h2>*new一个对象的过程</h2>
+      <ul>
+        <li> 1. 创建一个新对象</li>
+        <li> 2. this指向这个新对象</li>
+        <li> 3. 执行代码，即对this赋值</li>
+        <li> 4. 返回this</li>
+      </ul>
+      <div class="attention">
+        <bold>
+          解析（以Person函数为例）：创建一个新对象p，将构造函数Person()中的this指向新创建的对象p,p的_proto_（隐式原型）属性指向Person函数的prototype（显示原型），创建构造函数与原型以及对象的关系，调用对象，执行Person内属性或方法
+        </bold>
+      </div>
+    </article>
+  </section>
+  <section>
+    <h1>原型模式</h1>
+    <article>
+      <h2>*原型模式理解图</h2>
+      <img
+        src="https://img-blog.csdnimg.cn/20190403161208365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2ODQ4Mzk=,size_16,color_FFFFFF,t_70"
+        alt="原型模式理解图">
+      <ul>
+        <li> 1. 构造函数Fn的prototype(显式原型)是原型对象</li>
+        <li> 2. 原型对象的constructor是构造函数Fn</li>
+        <li> 3. 构造函数可通过new实例化一个实例,</li>
+        <li> 4. 实例f1的__proto__(隐式原型)是原型对象</li>
+        <li> 5. Fn.prototype是对象，它的__proto__是object的prototype</li>
+        <li> Object的prototype的__proto__为null</li>
+      </ul>
+      <div class="attention">
+        <bold>注意：熟记该图</bold>
+      </div>
+    </article>
+    <article>
+      <h2>*原型的五大原则（学习原型链的基础）</h2>
+      <ul>
+        <li> 1. 所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（null除外）</li>
+        <li> 2. 所有的引用类型（数组、对象、函数），都有一个__proto__属性（隐式原型），属性是一个普通的对象</li>
+        <li> 3. 所有的函数，都有一个prototype属性（显式原型），属性也是一个普通的对象</li>
+        <li> 4. 所有的引用类型（数组、对象、函数），_proto_属性值指向它的构造函数的“prototype”的值</li>
+        <li> 5. 当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的__proto__（即它的构造函数的prototype）中寻找</li>
+      </ul>
+
+      <div class="attention">
+
+        <bold>解析：</bold>
+        执行sayName时的时候，对象p本身没有该方法，会去它的__proto__即它的构造函数的prototype中寻找(p.__proto__或者Person.prototype)，于是找到sayName.
+      </div>
+    </article>
+    <article>
+      <h2>*原型对象</h2>
+      <p>Person这个构造函数的显式原型是一个对象，简称原型对象。Person.prototype就是原型对象</p>
+      <p> 每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型对象的内部指针</p>
+
+      <p>原型对象（Person.prototype）是 构造函数（Person）的一个实例</p>
+      <p>原型对象的好处是可以
+        让所有对象实例共享它所包含的属性和方法。换句话说，不必在构造函数中定义对象实例的信息，而是
+        可以将这些信息直接添加到原型对象中</p>
+      <div class="attention">
+        <bold>Person.prototype === p.__proto__:true</bold>
+      </div>
+    </article>
+    <article>
+      <h2>*原型链</h2>
+      <p>ECMAScript 中描述了原型链的概念，并将原型链作为实现继承的主要方法。其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法</p>
+      <img
+        src="https://img-blog.csdnimg.cn/2019040314162658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2ODQ4Mzk=,size_16,color_FFFFFF,t_70"
+        alt="">
+      <img
+        src="https://img-blog.csdnimg.cn/20190403110544924.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTE2ODQ4Mzk=,size_16,color_FFFFFF,t_70"
+        alt="">
+      <p>
+        执行toString方法时，p本身没有该方法，p.__proto__也没有，继续往上p.__proto__.__proto__即Person.prototype.__proto__,Person.prototype就是普通对象，Person.prototype.__proto__
+        = Object.prototype,Object中存在toString方法</p>
+
+      <p>每个构造函数都有一个原型对象，原型对象都包含一个指向构造函数的指针，而实例都包含一个指向原型。对象的内部指针这么一层一层的查找就是原型链查找，如此层层递进，就构成了实
+        例与原型的链条，这种链式结构叫做“原型链“</p>
+    </article>
+  </section>
+  <section>
+    <h1>结语</h1>
+    <article>
+      <h2>jquery中原型的使用</h2>
+      <p>jQuery.fn.init.prototype = jQuery.fn,将原型方法为什么放在jQuery.fn中，是因为要扩展插件,
+        只有$会暴露在window全局变量（太多会造成污染），将插件扩展统一到jQuery.fn.xxx这一个接口方便使用</p>
+    </article>
+    除了jquery中的运用，在vue中使用诸如echarts的插件时，我们会使用Vue.prototype.$echarts = echarts，将echarts引入到全局使用，同样自定义方法变量也可以如此使用。
+
+
+  </section>
+</body>
+<script type="text/javascript">
+  // ————————构造函数与普通函数区别————————
+  console.log("%c ————————构造函数与普通函数区别————————", "color:#fff;background:#08d")
+
+  // 构造函数
+  console.log("%c构造函数", "color:#08d;")
+
+  function Person(name, age) {
+    this.name = name
+    this.age = age
+    this.introduction = function() {
+      console.log(`my name is ${this.name}, I'm ${this.age} years old`)
+    }
+    //return this //构造函数默认有这句
+  }
+  var p = new Person('qietuniu', 18) // this=Person
+  p.introduction()
+
+  // 普通函数
+  console.log("%c普通函数", "color:#08d;")
+
+  function person(name, age) {
+    this.name = name
+    this.age = age
+    this.introduction = function() {
+      console.log(`my name is ${this.name}, I'm ${this.age} years old`)
+    }
+    return `直接返回：我的名字 ${this.name}, 我 ${this.age} 岁`
+  }
+  console.log(person('qietuniu', 18)) //this=window
+  window.introduction()
+
+  // ————————隐藏的构造函数————————
+  console.log("%c ————————隐藏的构造函数————————", "color:#fff;background:#08d")
+  console.log("new Object():")
+  console.log(new Object())
+  console.log("new Array():")
+  console.log(new Array())
+  console.log("new Function():")
+  console.log(new Function())
+
+  // ————————instanceof————————
+  console.log("%c ————————instanceof————————", "color:#fff;background:#08d")
+  console.log("p instanceof Person:" + (p instanceof Person))
+  console.log("p instanceof Object:" + (p instanceof Object))
+  // ————————new一个对象的过程————————
+  console.log("%c ————————new一个对象的过程————————", "color:#fff;background:#08d")
+  console.log("%c实例的构造函数属性（constructor）指向构造函数", "color:#08d;")
+  console.log("p是Person的实例，p含有constructor属性,该属性指向Person:")
+  console.log("p.__proto__.constructor === Person :" + (p.__proto__.constructor === Person))
+
+
+  // ————————原型模式理解图————————
+  console.log("%c ————————原型模式理解图————————", "color:#fff;background:#08d")
+  console.log("%c构造函数Fn的prototype(显式原型)是原型对象", "color:#08d;")
+  console.log("Person().prototype:")
+  console.log(Person.prototype)
+  console.log("%c原型对象的constructor是构造函数Fn", "color:#08d;")
+  console.log("Person().prototype.constructor:")
+  console.log(Person.prototype.constructor)
+  console.log("Person.prototype.constructor === Person:" + (Person.prototype.constructor === Person))
+  console.log("%c构造函数可通过new实例化一个实例", "color:#08d;")
+  console.log("p instanceof Person:" + (p instanceof Person))
+
+  console.log("%c实例p的__proto__(隐式原型)是原型对象", "color:#08d;")
+  console.log(p.__proto__)
+  console.log("Person.prototype === p.__proto__:" + (Person.prototype === p.__proto__))
+
+  console.log("%cPerson.prototype是对象，它的__proto__是object的prototype", "color:#08d;")
+  console.log("Person.prototype.__proto__ ")
+  console.log(Person.prototype.__proto__)
+  console.log("Person.prototype.__proto__ === Object.prototype:" + (Person.prototype.__proto__ === Object.prototype))
+
+  console.log("%cObject的prototype的__proto__为null", "color:#08d;")
+  console.log("Person.prototype.__proto__.__proto__相当于:Object.prototype.__proto__" + (Person.prototype.__proto__
+    .__proto__ === Object.prototype.__proto__))
+    console.log("Object.prototype.__proto__=== null:" + (Person.prototype.__proto__
+    .__proto__ === null))
+
+  // ————————原型的五大原则————————
+  console.log("%c ————————原型的五大原则————————", "color:#fff;background:#08d")
+  // 1
+  console.log("%c1、所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（null除外）", "color:#08d;")
+  var arr = [];
+  arr.a = 100;
+  var obj = {};
+  obj.a = 100;
+
+  function fn() {}
+  fn.a = 100;
+  console.log(`arr.a:${arr.a};obj.a:${obj.a};fn.a:${fn.a}`)
+  console.log("创建对象的三种方法")
+  // 字面量
+  var o1 = {
+    name: 'o1'
+  }
+  var o2 = new Object({
+    name: 'o2'
+  })
+
+  // 构造函数
+  var M = function() {
+    this.name = 'o3'
+  }
+  var o3 = new M()
+
+  // Object.create
+  var O = {
+    name: 'o4'
+  }
+  var o4 = Object.create(O)
+  console.log(o1)
+  console.log(o2)
+  console.log(o3)
+  console.log(o4)
+  // 2
+  console.log("%c2、所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（null除外）", "color:#08d;")
+  console.log(`arr.__proto__:${arr.__proto__};obj.__proto__:${obj.__proto__};fn.__proto__:${fn.__proto__}`)
+
+  // 3
+  console.log("%c3、所有的函数，都有一个prototype属性（显式原型），属性也是一个普通的对象", "color:#08d;")
+  console.log(`fn.prototype:`)
+  console.log(fn.prototype)
+
+  // 4
+  console.log("%c4、所有的引用类型（数组、对象、函数），_proto_属性值指向它的构造函数的“prototype”的值", "color:#08d;")
+  console.log(`arr.__proto__ === Array.prototype:${arr.__proto__ === Array.prototype}`)
+  console.log(`obj.__proto__ === Object.prototype:${obj.__proto__ === Object.prototype}`)
+  console.log(`fn.__proto__ === Function.prototype:${fn.__proto__ === Function.prototype}`)
+
+  // 5
+  console.log("%c5、当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的__proto__（即它的构造函数的prototype）中寻找", "color:#08d;")
+
+  Person.prototype.sayName = function() {
+    console.log(`我的名字：${this.name}`)
+  }
+  p.introduction()
+  p.sayName()
+  //  ————————原型对象————————
+  console.log("%c ————————原型对象————————", "color:#fff;background:#08d")
+
+  console.log("Person.prototype === p.__proto__:" + (Person.prototype === p.__proto__))
+  console.log("循环找出对象自身属性")
+  for (item in p) {
+    // 高级浏览器已经在for in中屏蔽了来自原型的属性
+    // 以下的判断可保证程序的健壮性,hasOwnProperty方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性
+    if (p.hasOwnProperty(item)) {
+      // 输出name和printName，没有alerName
+      console.log(item)
+    }
+  }
+  //  ————————原型链————————
+  console.log("%c ————————原型链————————", "color:#fff;background:#08d")
+
+  console.log(`p.toString():${p.toString()}`)
+
+  // ————————jquery————————————
+  
+  console.log("%c ————————jquery中原型的使用————————", "color:#fff;background:#08d")
+  var jQuery = function() {
+    return new jQuery.fn.init();
+  }
+  jQuery.fn = jQuery.prototype = {
+    constructor: jQuery,
+    init: function() {
+      this.jquery = "1.9.1";
+      return this;
+    }
+  }
+  jQuery.fn.init.prototype = jQuery.fn;
+  jQuery.fn.printQT = function() {
+    console.log("切图")
+    return this;
+  }
+  window.jQuery = window.$ = jQuery;
+  console.log(jQuery().printQT())
+</script>
+
+</html>
