@@ -5,6 +5,9 @@
 ### [前端必懂之熟悉又陌生的BFC](https://segmentfault.com/a/1190000018739115)
 [代码](https://github.com/qietuniu/blog/tree/master/BFC)
 
+### [前端必懂之Sticky Footer(粘性页脚)](https://segmentfault.com/a/1190000018961782#articleHeader7)
+[代码](https://github.com/qietuniu/blog/tree/master/stickyFooter)
+
 
 ## JS
 
