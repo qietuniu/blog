@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>三、已知底部高度，新增块级元素填补页脚遮挡，实现完美兼容</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      .container {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%; /*IE6不识别min-height*/
+        margin-bottom: -60px;
+      }
+      .placeholder,
+      .footer {
+        height: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">三、新增块级元素填补页脚遮挡</div>
+      <div class="section">
+        <p>已知底部高度，新增块级元素填补页脚遮挡，实现完美兼容</p>
+        <p>1、去除标签多余的margin,padding,给html和body设置100%；</p>
+        <p>2、外部容器min-height为100%，使得内容少时也能撑开</p>
+        <p>3、主题内容设置margin-bottom，值为底部的高度的负值</p>
+        <p>4、footer位置在与container同级，section同级新增块元素.底部和新增块元素高度一致</p>
+      </div>
+      <div class="placeholder"></div>
+    </div>
+    <div class="footer">Footer Section</div>
+  </body>
+</html>

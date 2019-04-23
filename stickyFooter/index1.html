@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>二、已知底部高度，利用padding-bottom和margin-top完美兼容</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      .container {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%; /*IE6不识别min-height*/
+      }
+      .section {
+        padding-bottom: 60px;
+      }
+      .footer {
+        position: relative;
+        margin-top: -60px;
+        width: 100%;
+        height: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">二、利用padding-bottom和margin-top完美兼容</div>
+      <div class="section">
+        <p>已知底部高度，利用padding-bottom和margin-top完美兼容</p>
+        <p>1、去除标签多余的margin,padding,给html和body设置100%；</p>
+        <p>2、外部容器min-height为100%，使得内容少时也能撑开</p>
+        <p>3、主体内容设置padding-bottom，这个为底部的高度</p>
+        <p>4、footer高度固定，margin-top的值为高度负值</p>  
+      </div>
+    </div>
+    <div class="footer">Copyright© 1994-2019 切图妞</div>
+  </body>
+</html>

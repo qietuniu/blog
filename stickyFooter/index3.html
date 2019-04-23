@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>四、底部不定高度，利用表格属性实现完美兼容</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      body,
+      html {
+        height: 100%;
+      }
+      .container {
+        display: table;
+        width: 100%;
+        min-height: 100%;
+      }
+      .section {
+        display: table-row;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">四、利用表格属性实现完美兼容</div>
+      <div class="section">
+        <p>底部不定高度，利用表格属性实现完美兼容</p>
+        <p>1、去除标签多余的margin,padding,给html和body设置100%；</p>
+        <p>2、外部容器min-height为100%;使得内容少时也能撑开，display属性设置为table</p>
+        <p>3、主体内容display属性设置为table-row，高度设置为100%</p>
+      </div>
+      <div class="footer">Copyright© 1994-2019 切图妞</div>
+    </div>
+  </body>
+</html>

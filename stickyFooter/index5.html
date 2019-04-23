@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>六、底部不定高度，利用flex实现效果</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      .container {
+        display: flex;
+        flex-flow: column;
+        min-height: 100vh;
+      }
+      .section {
+        flex: 1
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">六、flex弹性布局</div>
+      <div class="section">
+        <p>底部不定高度，利用flex实现效果,兼容性有限建议移动端使用</p>
+        <p>1、外部容器display设为flex弹性布局，flex-flow设置方向为column纵向并设置最小高度为100vh</p>
+        <p>2、主体内容flex属性设为1</p>
+      </div>
+      <div class="footer">Footer Section</div>
+    </div>
+  </body>
+</html>

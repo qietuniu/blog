@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>七、底部不定高度，利用Grid网格实现效果</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      .container {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+      }
+      .footer {
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="section">
+        <div class="header">七、Grid网格布局</div>
+        <p>底部不定高度，利用Grid网格实现效果</p>
+        <p>
+          1、外部容器display设为grid网格布局，grid-template-rows设置一个网格的行，fr单位可以帮助我们创建一个弹列的网格轨道，它代表了网格容器中可用的空间（就像Flexbox中无单位的值）
+        </p>
+        <p>2、header头部的位置放在主体内容内部</p>
+        <p>
+          3、footer中grid-row-start和grid-row-end属性设置单元格开始和结束的行线
+        </p>
+      </div>
+
+      <div class="footer">Copyright© 1994-2019 切图妞</div>
+    </div>
+  </body>
+  <script type="text/javascript"></script>
+</html>

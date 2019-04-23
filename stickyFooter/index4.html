@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>五、已知底部高度，使用calc计算实现效果</title>
+    <meta
+      name="viewport"
+      content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="./style/index.css" />
+    <style>
+      .container {
+        min-height: calc(100vh - 100px);
+      }
+      .footer {
+        height: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">五、calc计算</div>
+      <div class="section">
+        <p>vh存在兼容有限，一般在移动端使用。100vh可代替body和html的100%来拿到视口高度</p>
+        <p>1、外部容器使用calc计算，100vh减去底部高度</p>
+        <p>2、footer位置与container同级，高度固定</p>  
+      </div>
+    </div>
+    <div class="footer">Copyright© 1994-2019 切图妞</div>
+  </body>
+</html>

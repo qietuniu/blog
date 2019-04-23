@@ -1,0 +1,21 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.header {
+  background-color: #08d;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+}
+.section {
+  color: #333;
+}
+p{
+  padding: 10px;
+}
+.footer {
+  background-color: #08d;
+  color: #fff;
+  text-align: center;
+}
