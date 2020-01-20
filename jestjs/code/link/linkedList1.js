@@ -25,7 +25,6 @@ class LinkedList {
   /**
    * 根据数值index找节点元素element。
    * 空链表返回null
-   * @param {*} index
    */
   findByIndex (index) {
     let currentNode = this.head.next
@@ -70,11 +69,17 @@ class LinkedList {
     }
     return currentNode
   }
+  /**
+   * 删除元素
+   */
   remove (item) {
     let prevNode = this.findPrev(item)
     if (!prevNode) return
     prevNode.next = prevNode.next.next
   }
+  /**
+   * 编辑元素
+   */
   edit (item, newItem) {
     let currentNode = this.findByValue(item)
     currentNode.value = newItem
