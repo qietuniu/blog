@@ -13,11 +13,11 @@
 //   }
 //   return arr
 // }
-export default(arr) => {
+export default (arr) => {
   let len = arr.length
   if (len <= 1) return
   // 需要注意这里的边界, 因为需要在内层进行 i+1后的循环，所以外层需要 数组长度-1
-  for (let i = len; i < len - 1; i++) {
+  for (let i = 0; i < len - 1; i++) {
     let minIndex = i
     for (let j = i + 1; j < len; j++) {
       if (arr[j] < arr[minIndex]) {
