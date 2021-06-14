@@ -15,7 +15,7 @@
   "author": "cuc_ygh",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",
     "koa-ejs": "4.2.0",
