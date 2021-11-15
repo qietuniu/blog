@@ -1,9 +1,20 @@
+
+
 ## 简介
 
+- git多仓库管理
 - Monorepo 是管理项目代码的一个方式，指在一个项目仓库(repo)中管理多个模块/包(package)
 - monorepo 最主要的好处是统一的工作流和代码共享
 - [Lerna](https://github.com/lerna/lerna)是一个管理多个 npm 模块的工具,优化维护多包的工作流，解决多个包互相依赖，且发布需要手动维护多个包的问题
 - [yarn](https://classic.yarnpkg.com/en/docs/cli/)
+
+
+
+### git多仓库管理
+
+适用于小型项目，团队项目下的问题：
+
+- 分支管理混乱
 
 ### MultiRepo
 
@@ -19,6 +30,8 @@
 - CHANGELOG不好梳理，无法自动关联各个模块的变动
 
 ### MonoRepo
+
+Babel, React, Angular, Ember, Meteor, Jest 在使用
 
 #### 优点
 
