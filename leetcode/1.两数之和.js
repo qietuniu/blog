@@ -11,7 +11,7 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-    console.log(nums)
+    console.log(nums, target)
 };
 // @lc code=end
 
